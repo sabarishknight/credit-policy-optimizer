@@ -1,0 +1,11 @@
+# Python 3.10+
+pandas>=2.1
+numpy>=1.26
+scikit-learn>=1.4      # monotonic constraints + native categoricals in HistGradientBoosting
+matplotlib>=3.8
+openpyxl>=3.1          # read the Excel download once
+jinja2>=3.1            # pandas Styler tables in the notebook
+jupyter>=1.0
+streamlit>=1.36
+altair>=5.0
+pytest>=8.0

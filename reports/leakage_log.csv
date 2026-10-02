@@ -1,0 +1,32 @@
+column,role,known_at_decision,verdict,rationale
+loan_id,identifier,yes,drop,"Random key, no information"
+loan_issued_at,timestamp,yes,use (split + hour),Defines cohorts; hour of application is a legitimate signal
+country,application,yes,use,Market of the borrower
+issued_amount,application,yes,use,Requested and approved amount
+initial_loan_duration,application,yes,use,Requested term
+initial_interest_rate,application,yes,use,Price offered at decision time
+combined_income,application,yes,use,Income verified from bank statements and registry at application
+customer_risk_rating,application,yes,use,Internal grade at time of issue (per data dictionary)
+projected_npv_return,model output,unclear,exclude,"Output of the incumbent pricing engine; refresh timing undocumented, so excluded by default (ablation below)"
+has_default_within_12_months,target,no,TARGET,Default observed within 12 months on book
+is_default,outcome,no,LEAK,"Current default flag, known only after the fact"
+loan_status,outcome,no,LEAK,Repaid / Defaulted / Active as of the snapshot
+loan_status_risk,outcome,no,LEAK (used for exclusions),Snapshot status incl. Written Off / Cancelled
+months_in_default,outcome,no,LEAK,Exists only for defaulted loans
+days_past_due_principal,outcome,no,LEAK,Arrears after issue
+debt_occured_date_local,outcome,no,LEAK,Date arrears began
+principal_debt,outcome,no,LEAK,Unpaid scheduled principal
+principal_balance,outcome,no,LEAK,Outstanding balance at snapshot
+principal_paid_total,outcome,no,LEAK (economics only),"Cash received; used to measure profit, never as a feature"
+interest_paid_total,outcome,no,LEAK (economics only),Cash received
+extra_interest_paid_total,outcome,no,LEAK,"Penalty interest paid, only after a missed payment"
+late_fee_paid_total,outcome,no,LEAK (economics only),Only after a missed payment
+maintenance_fee_paid_total,outcome,no,LEAK (economics only),Accrues with time on book
+repaid_amount_total,outcome,no,LEAK (economics only),Total cash repaid to date
+months_on_book,outcome,no,LEAK,Short for loans that default early: a direct proxy of the target
+nr_of_payments,outcome,no,LEAK,Payment counter at snapshot
+next_payment_nr,outcome,no,LEAK,0 when the loan is closed or defaulted
+next_payment_date_local,outcome,no,LEAK,Missing when the loan is closed or defaulted
+early_repaid_at,outcome,no,LEAK,Prepayment date
+is_early_repaid_within_14_days,outcome,no,exclusion rule,14-day cooling-off withdrawals are not credit decisions
+loan_last_recorded_action_date_local,outcome,no,LEAK,Last servicing event

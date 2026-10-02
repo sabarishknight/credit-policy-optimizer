@@ -1,0 +1,122 @@
+{
+ "model": "WoE scorecard (logistic), monotone bins",
+ "pd_cutoff_single": 0.11153240717263306,
+ "refer_cap": 0.08,
+ "params": {
+  "cost_of_funds": 0.06,
+  "opex": 0.02,
+  "lgd_multiplier": 1.0,
+  "gain_multiplier": 1.0,
+  "review_cost": 20.0,
+  "review_catch": 0.35,
+  "review_false_decline": 0.05
+ },
+ "unit_economics": [
+  {
+   "term_bucket": "<=12m",
+   "loans": 7911,
+   "default_rate_12m": 0.047275944886866386,
+   "net_good": 0.08481024305139456,
+   "py_good": 0.5104917538924981,
+   "net_bad": -0.407792467501468,
+   "py_bad": 0.1945513684851705
+  },
+  {
+   "term_bucket": "13-24m",
+   "loans": 6577,
+   "default_rate_12m": 0.06659571233084993,
+   "net_good": 0.18509954781023574,
+   "py_good": 1.0790150701300198,
+   "net_bad": -0.5083345028809635,
+   "py_bad": 0.24561315309123438
+  },
+  {
+   "term_bucket": "25-36m",
+   "loans": 5529,
+   "default_rate_12m": 0.103454512570085,
+   "net_good": 0.24487925825759355,
+   "py_good": 1.4056567542569802,
+   "net_bad": -0.5651355029566735,
+   "py_bad": 0.2533320277082199
+  },
+  {
+   "term_bucket": "37-48m",
+   "loans": 2739,
+   "default_rate_12m": 0.09529025191675794,
+   "net_good": 0.2962616699026211,
+   "py_good": 1.6987247273961799,
+   "net_bad": -0.4965127757128799,
+   "py_bad": 0.29105865969242617
+  },
+  {
+   "term_bucket": "49-60m",
+   "loans": 86035,
+   "default_rate_12m": 0.13637473121404078,
+   "net_good": 0.21855996786642268,
+   "py_good": 1.8199522572779396,
+   "net_bad": -0.5868575648073,
+   "py_bad": 0.2675394696418298
+  },
+  {
+   "term_bucket": ">60m",
+   "loans": 2782,
+   "default_rate_12m": 0.16211358734723222,
+   "net_good": 0.2150877405771684,
+   "py_good": 2.132066295346313,
+   "net_bad": -0.5735927776828559,
+   "py_bad": 0.27431885598293226
+  }
+ ],
+ "windows": {
+  "train": [
+   "2023-10-01",
+   "2024-10-01"
+  ],
+  "valid": [
+   "2024-10-01",
+   "2025-01-01"
+  ],
+  "test": [
+   "2025-01-01",
+   "2025-07-01"
+  ],
+  "live": [
+   "2025-07-01",
+   "2026-07-01"
+  ]
+ },
+ "features": [
+  "rating_rank",
+  "country",
+  "combined_income",
+  "initial_loan_duration",
+  "loan_to_income"
+ ],
+ "reason_text": {
+  "rating_rank": "Internal risk grade is weak",
+  "country": "Market has elevated observed losses",
+  "combined_income": "Verified income is low",
+  "payment_to_income": "Monthly payment is high relative to income",
+  "loan_to_income": "Loan amount is high relative to income",
+  "issued_amount": "Requested amount is in a higher-risk range",
+  "initial_loan_duration": "Requested term is in a higher-risk range",
+  "price_premium": "Price is above the typical rate for this grade",
+  "application_hour": "Application timing pattern linked to higher risk",
+  "initial_interest_rate": "Interest rate band associated with higher risk",
+  "monthly_instalment": "Monthly instalment is in a higher-risk range"
+ },
+ "max_points": {
+  "combined_income": 113,
+  "country": 122,
+  "initial_loan_duration": 129,
+  "loan_to_income": 118,
+  "rating_rank": 142
+ },
+ "test_metrics": {
+  "AUC": 0.7301947535142751,
+  "Gini": 0.4603895070285502,
+  "KS": 0.3337380912920348,
+  "Brier": 0.06925496798343704,
+  "LogLoss": 0.25335587889522665
+ }
+}
